@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#MISE description="Capture a still image from the webcam"
+#USAGE flag "-d --device <index>" default="0" help="Video device index (see: mise run devices)"
+#USAGE flag "-o --output <path>" help="Output file path (default: temp file)"
+set -euo pipefail
+
+device="${usage_device:-0}"
+output="${usage_output:-}"
+
+if [[ -z "$output" ]]; then
+  dir="$(mktemp -d /tmp/cam-XXXXXX)"
+  output="$dir/snap.jpg"
+fi
+
+ffmpeg -f avfoundation -framerate 30 -pixel_format uyvy422 -i "$device" -frames:v 1 -y -loglevel error "$output"
+
+echo "$output"

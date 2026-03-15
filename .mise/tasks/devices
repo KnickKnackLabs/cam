@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#MISE description="List available capture devices (video and audio)"
+set -euo pipefail
+
+output="$(ffmpeg -f avfoundation -list_devices true -i "" 2>&1)"
+
+echo "Video:"
+echo "$output" | sed -n '/video devices/,/audio devices/p' | grep "^\[AVFoundation.*\] \[" || true
+
+echo ""
+echo "Audio:"
+echo "$output" | sed -n '/audio devices/,$ p' | grep "^\[AVFoundation.*\] \[" || true

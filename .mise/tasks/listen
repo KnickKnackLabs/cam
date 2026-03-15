@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#MISE description="Record an audio clip from the microphone"
+#USAGE flag "-d --device <index>" default="0" help="Audio device index (see: mise run devices)"
+#USAGE flag "-o --output <path>" help="Output file path (default: temp file)"
+#USAGE flag "-t --duration <seconds>" default="10" help="Recording duration in seconds"
+set -euo pipefail
+
+echo "not implemented"
